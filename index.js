@@ -16,17 +16,17 @@ app.get("/docs", (req, res) => {
         let results = [];
 
         const $ = cheerio.load(htmlDoc);
-        /*
-        let docMain = $('div#main-col-body').each( (i, elem) => {
-            results[i] = $(elem).html()
-        });
-        */
+
         let docMain = $('div#main-col-body').children().each( (i, elem) => {
-            results[i] = $(elem).html().trim().replace( /  +/g, ' ' );
+            results[i] = $(elem).html().replace(/(\r\n\t|\n|\r\t)/gm, " ");
         });
-        for(let i=0; i<results.length; i++)
-            console.log('>> '+results[i]);
-        res.send("success");
+        for(let i=0; i<results.length; i++) {
+            results[i] = results[i].replace(/(<([^>]+)>)/ig,"");
+            results[i] = results[i].replace(/\t+/g,"");
+            results[i] = results[i].replace(/  +/g, ' ').trim();
+            console.log(results[i] + '\n');
+        }
+        res.send(results);
     });
 });
 
