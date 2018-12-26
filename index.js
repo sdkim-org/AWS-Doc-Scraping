@@ -26,7 +26,7 @@ app.get("/docs", (req, res) => {
             results[i] = results[i].replace(/  +/g, ' ').trim();
             console.log(results[i] + '\n');
         }
-        res.send(results);
+        res.send("success");
     });
 });
 
