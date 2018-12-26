@@ -22,10 +22,10 @@ app.get("/docs", (req, res) => {
         });
         */
         let docMain = $('div#main-col-body').children().each( (i, elem) => {
-            results[i] = $(elem).html();
+            results[i] = $(elem).html().trim().replace( /  +/g, ' ' );
         });
         for(let i=0; i<results.length; i++)
-            console.log(">> "+results[i]);
+            console.log('>> '+results[i]);
         res.send("success");
     });
 });
