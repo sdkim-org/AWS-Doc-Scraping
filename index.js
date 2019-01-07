@@ -6,6 +6,9 @@ const cheerio = require('cheerio');
 const Iconv = require('iconv').Iconv;
 const iconv = new Iconv('CP949', 'utf-8//translit//ignore');
 
+/*** express 의 view engine 에 ejs 를 설정 ***/
+app.set("view engine", "ejs");
+
 /*** app.use() 는 HTTP Method 와 관게없이 무조건 실행 ***/
 /*** '/' 에 접속시 '/public' 에 접속 ***/
 app.use(express.static(__dirname + '/public'));
