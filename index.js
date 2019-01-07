@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 
 const request = require('request');
@@ -12,6 +13,12 @@ app.set("view engine", "ejs");
 /*** app.use() 는 HTTP Method 와 관게없이 무조건 실행 ***/
 /*** '/' 에 접속시 '/public' 에 접속 ***/
 app.use(express.static(__dirname + '/public'));
+
+/*** bodyParser로 stream의 form data를 req.body에 담기 ***/
+app.use(bodyParser.json());                         // json data 를
+app.use(bodyParser.urlencoded({extended:true}));    // urlencoded data 를 담는다.
+
+app.post("/docs", parseDocs);
 
 app.get("/docs", (req, res) => {
     const url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html";
@@ -40,3 +47,33 @@ app.get("/docs", (req, res) => {
 app.listen(3000, () => {
     console.log('listening on port 3000');
 });
+
+function parseDocs(req, res) {
+    const { url } = req.body;
+    request({url, encoding: null}, (err, response, body) => {
+        if(err) {
+            console.log(err);
+            res.send("Invalid URL");
+            //res.render("error");
+            return ;
+        }
+
+        let htmlDoc = iconv.convert(body).toString();
+
+        let results = [];
+
+        const $ = cheerio.load(htmlDoc);
+
+        $('div#main-col-body').children().each((i, elem) => {
+            results[i] = $(elem).html().replace(/(\r\n\t|\n|\r\t)/gm, " "); // 개행 제거하기 (플랫폼 상관 없음)
+        });
+
+        for (let i = 0; i < results.length; i++) {
+            results[i] = results[i].replace(/(<([^>]+)>)/ig, "");    // 태그 제거하기
+            results[i] = results[i].replace(/\t+/g, "");             // \t 제거하기
+            results[i] = results[i].replace(/  +/g, ' ').trim();    // 여러 개의 공백을 하나의 공백으로 변경
+            console.log(results[i] + '\n');
+        }
+        res.render("result");
+    });
+}
