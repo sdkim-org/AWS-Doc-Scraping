@@ -6,6 +6,10 @@ const cheerio = require('cheerio');
 const Iconv = require('iconv').Iconv;
 const iconv = new Iconv('CP949', 'utf-8//translit//ignore');
 
+/*** app.use() 는 HTTP Method 와 관게없이 무조건 실행 ***/
+/*** '/' 에 접속시 '/public' 에 접속 ***/
+app.use(express.static(__dirname + '/public'));
+
 app.get("/docs", (req, res) => {
     const url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html";
 
