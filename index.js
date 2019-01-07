@@ -18,12 +18,12 @@ app.get("/docs", (req, res) => {
         const $ = cheerio.load(htmlDoc);
 
         let docMain = $('div#main-col-body').children().each( (i, elem) => {
-            results[i] = $(elem).html().replace(/(\r\n\t|\n|\r\t)/gm, " ");
+            results[i] = $(elem).html().replace(/(\r\n\t|\n|\r\t)/gm, " "); // 개행 제거하기 (플랫폼 상관 없음)
         });
         for(let i=0; i<results.length; i++) {
-            results[i] = results[i].replace(/(<([^>]+)>)/ig,"");
-            results[i] = results[i].replace(/\t+/g,"");
-            results[i] = results[i].replace(/  +/g, ' ').trim();
+            results[i] = results[i].replace(/(<([^>]+)>)/ig,"");    // 태그 제거하기
+            results[i] = results[i].replace(/\t+/g,"");             // \t 제거하기
+            results[i] = results[i].replace(/  +/g, ' ').trim();    // 여러 개의 공백을 하나의 공백으로 변경
             console.log(results[i] + '\n');
         }
         res.send("success");
