@@ -74,12 +74,9 @@ function testDoc(req, res) {
             results[i] = results[i].replace(/(<li([^>]+)>)/ig, "\n");    // li 태그 제거하기
             results[i] = results[i].replace(/<dt>/ig, "\n");    // dt 태그 제거하기
             results[i] = results[i].replace(/<dd>/ig, "\n");    // dd 태그 제거하기
-            //console.log(results[i] + '\n');
+            results[i] = results[i].replace(/(<([^>]+)>)/ig,"");    // 태그 제거하기
             console.log(results[i]);
         });
-        for(let i=0; i<results.length; i++) {
-            results[i] = results[i].replace(/(<([^>]+)>)/ig,"");    // 태그 제거하기
-        }
         res.send("success");
     });
 }
