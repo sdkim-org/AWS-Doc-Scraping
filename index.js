@@ -38,20 +38,22 @@ function parseDocs(req, res) {
         let htmlDoc = iconv.convert(body).toString();
 
         let results = [];
+        let str = "";
 
         const $ = cheerio.load(htmlDoc);
 
-        $('div#main-col-body').children().each((i, elem) => {
+        let docMain = $('div#main-col-body').children().each( (i, elem) => {
             results[i] = $(elem).html().replace(/(\r\n\t|\n|\r\t)/gm, " "); // 개행 제거하기 (플랫폼 상관 없음)
-        });
-
-        for (let i = 0; i < results.length; i++) {
-            results[i] = results[i].replace(/(<([^>]+)>)/ig, "");    // 태그 제거하기
-            results[i] = results[i].replace(/\t+/g, "");             // \t 제거하기
+            results[i] = results[i].replace(/\t+/g,"");             // \t 제거하기
             results[i] = results[i].replace(/  +/g, ' ').trim();    // 여러 개의 공백을 하나의 공백으로 변경
-            console.log(results[i] + '\n');
-        }
-        res.send("Success");
+            results[i] = results[i].replace(/(<li([^>]+)>)/ig, "@@@");    // li 태그 제거하기
+            results[i] = results[i].replace(/<dt>/ig, "@@@");    // dt 태그 제거하기
+            results[i] = results[i].replace(/<dd>/ig, "@@@");    // dd 태그 제거하기
+            results[i] = results[i].replace(/(<([^>]+)>)/ig,"");    // 태그 제거하기
+            results[i] = results[i].replace(/@@@/ig, "<br>");    // @@@ 문자열 <br> 로 대체
+            str = str + results[i] + '<br>';
+        });
+        res.send(str);
         //res.render("result");
     });
 }
