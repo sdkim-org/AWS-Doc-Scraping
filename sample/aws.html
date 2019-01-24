@@ -1,0 +1,697 @@
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>What Is Amazon EC2? - Amazon Elastic Compute Cloud</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="home" href="#top" />
+    <link rel="up" href="concepts.html" title="What Is Amazon EC2?" />
+    <link rel="next" href="ec2-instances-and-amis.html" title="Instances and AMIs" />
+    <meta name="description" content="Use Amazon EC2 for scalable computing capacity in the AWS cloud so you can develop and deploy applications without hardware constraints." />
+    <meta name="keywords" content="EC2,Amazon EC2,EC2 instance,instance,VM,virtual machine" />
+    <meta name="deployment_region" content="IAD" />
+    <meta name="product" content="Amazon Elastic Compute Cloud" />
+    <meta name="guide" content="User Guide for Linux Instances" />
+    <meta name="guide-locale" content="en_us" />
+    <meta name="tocs" content="toc-contents.json" />
+    <link rel="icon" type="image/ico" href="/images/favicon.ico" />
+    <link rel="shortcut icon" type="image/ico" href="/images/favicon.ico" />
+    <link rel="canonical" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html" />
+    <link rel="stylesheet" type="text/css" href="/css/jquery-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="/font/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/google-font.css" />
+    <link id="code-style" rel="stylesheet" type="text/css" href="/css/code/light.css" />
+    <link rel="stylesheet" type="text/css" href="/css/jquery-ui.theme.css" />
+    <link rel="stylesheet" type="text/css" href="/css/colorbox.css" />
+    <link rel="stylesheet" type="text/css" href="/css/awsdocs.css?v=20181221" /><script type="text/javascript" src="/js/highlight.pack.js"></script><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/jquery-ui.min.js"></script><script type="text/javascript" src="/js/jquery.colorbox.js"></script><script type="text/javascript" src="/js/awsdocs.min.js?v=20181221"></script></head>
+<body id="top">
+<div xmlns:db="http://docbook.org/ns/docbook" id="aws-nav" class="aws-nav-header">
+    <div class="aws-nav-header-left">
+        <div class="aws-nav-logo">
+            <!--aws_logo_105x39.png--><a href="http://aws.amazon.com"><img src="/images/aws_logo_105x39.png" alt="Amazon Web Services" /></a></div>
+    </div>
+    <div id="aws-nav-header-right" class="aws-nav-header-right">
+        <div class="aws-nav-cta-button-outer"><a id="aws-nav-cta-button" class="aws-nav-button" href="https://console.aws.amazon.com/console/home">Sign In to the Console</a></div>
+        <div class="aws-nav-popover-trigger" data-dropdown="aws-nav-dropdown-lang"><select id="languageSelection" onchange="SelectLanguage()">
+            <option value="/de_de/AWSEC2/latest/UserGuide/concepts.html">Deutsch</option>
+            <option value="/en_us/AWSEC2/latest/UserGuide/concepts.html" selected="selected">English</option>
+            <option value="/es_es/AWSEC2/latest/UserGuide/concepts.html">Español</option>
+            <option value="/fr_fr/AWSEC2/latest/UserGuide/concepts.html">Français</option>
+            <option value="/it_it/AWSEC2/latest/UserGuide/concepts.html">Italiano</option>
+            <option value="/ja_jp/AWSEC2/latest/UserGuide/concepts.html">日本語</option>
+            <option value="/ko_kr/AWSEC2/latest/UserGuide/concepts.html">한국어</option>
+            <option value="/pt_br/AWSEC2/latest/UserGuide/concepts.html">Português</option>
+            <option value="/zh_cn/AWSEC2/latest/UserGuide/concepts.html">中文 (简体)</option>
+            <option value="/zh_tw/AWSEC2/latest/UserGuide/concepts.html">中文 (繁體)</option></select></div><a class="btn btn-rss-link" id="rss-link-top" target="_blank" href="amazon-ec2-release-notes.rss" title="View RSS Feed"></a><a class="btn btn-kindle-link" id="kindle-link-top" target="_blank" href="http://www.amazon.com/dp/B076452RSZ" title="Open Kindle"></a><a class="btn btn-pdf-link" id="pdf-link-top" href="ec2-ug.pdf#concepts" target="_blank" title="Open PDF"></a><a class="btn btn-github-link" id="github-link-top" href="https://github.com/awsdocs/amazon-ec2-user-guide/tree/master/doc_source/concepts.md" target="_blank" title="Edit on GitHub"></a><div id="aws-nav-quicklinks-separator" class="aws-nav-quicklinks-separator">
+        <div class="aws-nav-left"></div>
+        <div class="aws-nav-right"></div>
+    </div>
+    </div>
+</div>
+<div id="content-container">
+    <div id="left-column">
+        <div id="left-col-header">
+            <div xmlns:db="http://docbook.org/ns/docbook" id="left-col-top-content">
+                <div id="service-name">Amazon Elastic Compute Cloud </div>
+                <div id="search"><i id="search-icon" class="fa fa-search fa-2x"></i></div>
+                <div id="guide-info">User Guide for Linux Instances
+                    <div id="content-button"><i id="toggle-contents" class="fa fa-bars"></i></div>
+                </div>
+            </div>
+            <form id="finegrainedSearch" method="get" onsubmit="return searchFormSubmit(this);" action="/search/doc-search.html">
+                <div id="search-form"><select id="search-select" name="searchPath">
+                    <option value="all">Entire Site</option>
+                    <option value="AWSMarketplace">AMIs from AWS Marketplace</option>
+                    <option value="amis">AMIs from All Sources</option>
+                    <option value="articles">Articles &amp; Tutorials</option>
+                    <option value="products_and_info">AWS Product Information</option>
+                    <option value="case_studies">Case Studies</option>
+                    <option value="customerapps">Customer Apps</option>
+                    <option value="documentation">Documentation</option>
+                    <option value="documentation-product">Documentation - This Product</option>
+                    <option value="documentation-guide" selected="selected">Documentation - This Guide</option>
+                    <option value="datasets">Public Data Sets</option>
+                    <option value="releasenotes">Release Notes</option>
+                    <option value="solution_providers">Partners</option>
+                    <option value="code">Sample Code &amp; Libraries</option></select><br /><input id="search-query" name="searchQuery" type="text" placeholder="Search" /><input id="search-button" src="/images/search-button.png" alt="Go" type="image" /></div><input type="hidden" name="this_doc_product" id="this_doc_product" value="Amazon Elastic Compute Cloud" /><input type="hidden" name="this_doc_guide" id="this_doc_guide" value="User Guide for Linux Instances" /><input type="hidden" name="doc_locale" value="en_us" /></form>
+        </div>
+        <div id="toc"></div>
+    </div>
+    <div id="main-column">
+        <div id="main">
+            <div id="main-content">
+                <div id="main-col-body">
+                    <table summary="Breadcrumbs">
+                        <tr>
+                            <td>
+                                <div class="breadcrumb"><a href="/index.html">AWS Documentation</a> » <a href="/ec2/index.html">Amazon EC2</a> » <a href="index.html">User Guide for Linux Instances</a> » <span class="breadcrumb">What Is Amazon EC2?</span></div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div id="language-notice">
+                        <div class="language-notice-text"></div>
+                    </div>
+                    <div></div>
+                    <h1 class="topictitle" id="concepts">What Is Amazon EC2?</h1>
+                    <p>Amazon Elastic Compute Cloud (Amazon EC2) provides scalable computing capacity in
+                        the Amazon Web Services (AWS)
+                        cloud. Using Amazon EC2 eliminates your need to invest in hardware up front, so
+                        you can develop
+                        and deploy applications faster. You can use Amazon EC2 to launch as many or as few
+                        virtual
+                        servers as you need, configure security and networking, and manage storage. Amazon
+                        EC2 enables
+                        you to scale up or down to handle changes in requirements or spikes in popularity,
+                        reducing
+                        your need to forecast traffic.
+                    </p>
+                    <p>For more information about cloud computing, see <a href="https://aws.amazon.com/what-is-cloud-computing/" target="_blank">What is Cloud
+                        Computing?</a></p>
+
+                    <h2 id="ec2-features">Features of Amazon EC2</h2>
+
+
+                    <p>Amazon EC2 provides the following features:</p>
+
+                    <div class="itemizedlist">
+
+
+
+
+
+
+
+
+
+
+
+
+                        <ul class="itemizedlist" type="disc">
+                            <li class="listitem">
+
+                                <p>Virtual computing environments, known as <em>instances</em></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p>Preconfigured templates for your instances, known as <em>Amazon Machine
+                                    Images (AMIs)</em>, that package the bits you need for your server
+                                    (including the operating system and additional software)
+                                </p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p>Various configurations of CPU, memory, storage, and networking capacity for
+                                    your instances, known as <em>instance types</em></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p>Secure login information for your instances using <em>key
+                                    pairs</em> (AWS stores the public key, and you store the private key
+                                    in a secure place)
+                                </p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p>Storage volumes for temporary data that's deleted when you stop or terminate
+                                    your instance, known as <em>instance store volumes</em></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p>Persistent storage volumes for your data using Amazon Elastic Block Store (Amazon
+                                    EBS), known as
+                                    <em>Amazon EBS volumes</em></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p>Multiple physical locations for your resources, such as instances and Amazon EBS
+                                    volumes, known as <em>regions</em> and <em>Availability
+                                        Zones</em></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p>A firewall that enables you to specify the protocols, ports, and source IP
+                                    ranges that can reach your instances using <em>security
+                                        groups</em></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p>Static IPv4 addresses for dynamic cloud computing, known as <em>Elastic
+                                    IP addresses</em></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p>Metadata, known as <em>tags</em>, that you can create and assign
+                                    to your Amazon EC2 resources
+                                </p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p>Virtual networks you can create that are logically isolated from the rest of
+                                    the AWS cloud, and that you can optionally connect to your own network, known
+                                    as
+                                    <em>virtual private clouds</em> (VPCs)
+                                </p>
+
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <p>For more information about the features of Amazon EC2, see the <a href="https://aws.amazon.com/ec2" target="_blank">Amazon EC2 product page</a>.
+                    </p>
+
+
+
+
+                    <p>For more information about running your website on AWS, see <a href="https://aws.amazon.com/websites/" target="_blank">Web Hosting</a>.
+                    </p>
+
+
+
+                    <h2 id="how-to-get-started">How to Get Started with Amazon EC2</h2>
+
+
+                    <p>First, you need to get set up to use Amazon EC2. After you are set up, you are ready
+                        to complete
+                        the Getting Started tutorial for Amazon EC2. Whenever you need more information about
+                        an
+                        Amazon EC2 feature, you can read the technical documentation.
+                    </p>
+
+
+                    <div class="itemizedlist">
+
+                        <p class="title"><b>Get Up and Running</b></p>
+
+
+
+                        <ul class="itemizedlist" type="disc">
+                            <li class="listitem">
+
+                                <p><a href="get-set-up-for-amazon-ec2.html">Setting Up with Amazon EC2</a></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p><a href="EC2_GetStarted.html">Getting Started with Amazon EC2 Linux Instances</a></p>
+
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="itemizedlist">
+
+                        <p class="title"><b>Basics</b></p>
+
+
+
+
+
+
+                        <ul class="itemizedlist" type="disc">
+                            <li class="listitem">
+
+                                <p><a href="ec2-instances-and-amis.html">Instances and AMIs</a></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p><a href="using-regions-availability-zones.html">Regions and Availability
+                                    Zones</a></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p><a href="instance-types.html">Instance Types</a></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p><a href="Using_Tags.html">Tags</a></p>
+
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="itemizedlist">
+
+                        <p class="title"><b>Networking and Security</b></p>
+
+
+
+
+
+                        <ul class="itemizedlist" type="disc">
+                            <li class="listitem">
+
+                                <p><a href="ec2-key-pairs.html">Amazon EC2 Key Pairs</a></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p><a href="using-network-security.html">Security Groups</a></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p><a href="elastic-ip-addresses-eip.html">Elastic IP Addresses</a></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p><a href="using-vpc.html">Amazon EC2 and Amazon VPC</a></p>
+
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="itemizedlist">
+
+                        <p class="title"><b>Storage</b></p>
+
+
+
+                        <ul class="itemizedlist" type="disc">
+                            <li class="listitem">
+
+                                <p><a href="AmazonEBS.html">Amazon EBS</a></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p><a href="InstanceStorage.html">Instance Store</a></p>
+
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="itemizedlist">
+
+                        <p class="title"><b>Working with Linux Instances</b></p>
+
+
+
+
+
+                        <ul class="itemizedlist" type="disc">
+                            <li class="listitem">
+
+                                <p><a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/execute-remote-commands.html">Remote Management
+                                    (Run Command)</a></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p><a href="ec2-lamp-amazon-linux-2.html">Tutorial: Install a LAMP Web Server on Amazon Linux 2</a></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p><a href="SSL-on-an-instance.html">Tutorial: Configure Apache Web Server on Amazon Linux 2 to Use
+                                    SSL/TLS</a></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p><a href="https://docs.aws.amazon.com/gettingstarted/latest/wah-linux/">Getting Started with AWS: Hosting a Web App for Linux</a></p>
+
+                            </li>
+                        </ul>
+                    </div>
+
+
+
+                    <p>If you have questions about whether AWS is right for you, <a href="https://aws.amazon.com/contact-us/" target="_blank">contact AWS Sales</a>. If you have
+                        technical questions about Amazon EC2, use the <a href="https://forums.aws.amazon.com/forum.jspa?forumID=30" target="_blank">Amazon EC2 forum</a>.
+                    </p>
+
+
+
+                    <h2 id="related-services">Related Services</h2>
+
+
+                    <p>You can provision Amazon EC2 resources, such as instances and volumes, directly using
+                        Amazon EC2. You can also provision Amazon EC2 resources using other services in
+                        AWS. For more
+                        information, see the following documentation:
+                    </p>
+
+                    <div class="itemizedlist">
+
+
+
+
+
+                        <ul class="itemizedlist" type="disc">
+                            <li class="listitem">
+
+                                <p><a href="https://docs.aws.amazon.com/autoscaling/latest/userguide/">Amazon EC2 Auto Scaling User Guide</a></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/">AWS CloudFormation User Guide</a></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p><a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/">AWS Elastic Beanstalk Developer Guide</a></p>
+
+                            </li>
+                            <li class="listitem">
+
+                                <p><a href="https://docs.aws.amazon.com/opsworks/latest/userguide/">AWS OpsWorks User Guide</a></p>
+
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <p>To automatically distribute incoming application traffic across multiple instances,
+                        use Elastic Load Balancing. For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/">Elastic Load Balancing User Guide</a>.
+                    </p>
+
+
+                    <p>To monitor basic statistics for your instances and Amazon EBS volumes, use Amazon
+                        CloudWatch. For
+                        more information, see the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/">Amazon CloudWatch User Guide</a>.
+                    </p>
+
+
+                    <p>To automate actions, such as activating a Lambda function whenever a new Amazon EC2
+                        instance
+                        starts, or invoking SSM Run Command whenever an event in another AWS service
+                        happens, use Amazon CloudWatch Events. For more information, see the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/">Amazon CloudWatch Events User Guide</a>.
+                    </p>
+
+
+                    <p>To monitor the calls made to the Amazon EC2 API for your account, including calls
+                        made by
+                        the AWS Management Console, command line tools, and other services, use AWS CloudTrail.
+                        For more
+                        information, see the <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/">AWS CloudTrail User Guide</a>.
+                    </p>
+
+
+                    <p>To get a managed relational database in the cloud, use Amazon Relational Database
+                        Service (Amazon RDS) to launch a
+                        database instance. Although you can set up a database on an EC2 instance, Amazon
+                        RDS offers
+                        the advantage of handling your database management tasks, such as patching the
+                        software,
+                        backing up, and storing the backups. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/DeveloperGuide/">Amazon Relational Database Service Developer Guide</a>.
+                    </p>
+
+
+                    <p>To import virtual machine (VM) images from your local environment into AWS and convert
+                        them into ready-to-use AMIs or instances, use  VM Import/Export. For more information,
+                        see the
+                        <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/"> VM Import/Export User Guide</a>.
+                    </p>
+
+
+                    <h2 id="access-ec2">Accessing Amazon EC2</h2>
+
+
+                    <p>Amazon EC2 provides a web-based user interface, the Amazon EC2 console. If you've
+                        signed up for
+                        an AWS account, you can access the Amazon EC2 console by signing into the AWS Management
+                        Console and
+                        selecting <b>EC2</b> from the console home page.
+                    </p>
+
+
+                    <p>If you prefer to use a command line interface, you have the following options:</p>
+
+                    <div class="variablelist">
+
+
+
+                        <dl>
+
+                            <dt><b><span class="term">AWS Command Line Interface (CLI)</span></b></dt>
+
+                            <dd>
+
+                                <p>Provides commands for a broad set of AWS products, and is supported on
+                                    Windows, Mac, and Linux. To get started, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/">AWS Command Line Interface User Guide</a>. For more
+                                    information about the commands for Amazon EC2, see <a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/index.html">ec2</a> in the
+                                    <em>AWS CLI Command Reference</em>.
+                                </p>
+
+                            </dd>
+
+
+                            <dt><b><span class="term">AWS Tools for Windows PowerShell</span></b></dt>
+
+                            <dd>
+
+                                <p>Provides commands for a broad set of AWS products for those who script
+                                    in the PowerShell environment. To get started, see the <a href="https://docs.aws.amazon.com/powershell/latest/userguide/">AWS Tools for Windows PowerShell User Guide</a>. For
+                                    more information about the cmdlets for Amazon EC2, see the <a href="https://docs.aws.amazon.com/powershell/latest/reference/Index.html">AWS Tools for PowerShell Cmdlet Reference</a>.
+                                </p>
+
+                            </dd>
+
+                        </dl>
+                    </div>
+
+
+                    <p>Amazon EC2 provides a Query API. These requests are HTTP or HTTPS requests that use
+                        the
+                        HTTP verbs GET or POST and a Query parameter named <code class="code">Action</code>. For more
+                        information about the API actions for Amazon EC2, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/query-apis.html">Actions</a> in the
+                        <em>Amazon EC2 API Reference</em>.
+                    </p>
+
+
+                    <p>If you prefer to build applications using language-specific APIs instead of submitting
+                        a request over HTTP or HTTPS, AWS provides libraries, sample code, tutorials, and
+                        other resources for software developers. These libraries provide basic functions
+                        that
+                        automate tasks such as cryptographically signing your requests, retrying requests,
+                        and
+                        handling error responses, making it is easier for you to get started. For more
+                        information, see <a href="https://aws.amazon.com/tools/" target="_blank">AWS SDKs and
+                            Tools</a>.
+                    </p>
+
+
+
+                    <h2 id="ec2-pricing">Pricing for Amazon EC2</h2>
+
+
+                    <p>When you sign up for AWS, you can get started with Amazon EC2 for free using the <a href="https://aws.amazon.com/free/" target="_blank">AWS Free Tier</a>.
+                    </p>
+
+
+                    <p>Amazon EC2 provides the following purchasing options for instances:</p>
+
+                    <div class="variablelist">
+
+
+
+
+                        <dl>
+
+                            <dt><span class="term">On-Demand Instances</span></dt>
+
+                            <dd>
+
+                                <p>Pay for the instances that you use by the <span>second</span>,
+                                    with no long-term commitments or upfront payments.
+                                </p>
+
+                            </dd>
+
+
+                            <dt><span class="term">Reserved Instances</span></dt>
+
+                            <dd>
+
+                                <p>Make a low, one-time, up-front payment for an instance, reserve it for a
+                                    one- or three-year term, and pay a significantly lower hourly rate for these
+                                    instances.
+                                </p>
+
+                            </dd>
+
+
+                            <dt><span class="term">Spot Instances</span></dt>
+
+                            <dd>
+
+                                <p>Request unused EC2 instances, which can lower your costs significantly.</p>
+
+                            </dd>
+
+                        </dl>
+                    </div>
+
+                    <p>For a complete list of charges and specific prices for Amazon EC2, see <a href="https://aws.amazon.com/ec2/pricing" target="_blank">Amazon EC2 Pricing</a>.
+                    </p>
+
+                    <p>To calculate the cost of a sample provisioned environment, see <a href="https://aws.amazon.com/economics/" target="_blank">Cloud Economics Center</a>.
+                    </p>
+
+
+                    <p>To see your bill, go to your <a href="https://aws.amazon.com/account-activity" target="_blank">AWS
+                        Account Activity page</a>. Your bill contains links to usage reports that
+                        provide details about your bill. To learn more about AWS account billing, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/">AWS Account Billing</a>.
+                    </p>
+
+
+                    <p>If you have questions concerning AWS billing, accounts, and events, <a href="https://aws.amazon.com/contact-us/" target="_blank">contact AWS Support</a>.
+                    </p>
+
+
+                    <p>For an overview of Trusted Advisor, a service that helps you optimize the costs,
+                        security, and performance of your AWS environment, see <a href="https://aws.amazon.com/premiumsupport/trustedadvisor/" target="_blank">AWS Trusted Advisor</a>.
+                    </p>
+
+
+                    <h2 id="pci-compliance">PCI DSS Compliance</h2>
+
+
+                    <p>Amazon EC2 supports the processing, storage, and transmission
+                        of credit card data by a merchant or service provider, and has been
+                        validated as being compliant with Payment Card Industry (PCI) Data Security Standard
+                        (DSS).
+                        For more information about PCI DSS, including how to request a copy of the AWS PCI
+                        Compliance Package,
+                        see <a href="https://aws.amazon.com/compliance/pci-dss-level-1-faqs/" target="_blank">PCI DSS Level 1</a>.
+
+                    </p>
+
+                </div>
+                <noscript>
+                    <div>
+                        <div>
+                            <div>
+                                <div id="js_error_message">
+                                    <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p>
+                                    <p>To use the AWS Documentation, Javascript must be enabled. Please refer to your browser's
+                                        Help pages for instructions.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </noscript>
+                <div id="main-col-footer">
+                    <div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div>
+                    <div id="next"><a class="awstoc" accesskey="n" href="ec2-instances-and-amis.html">Next »</a></div>
+                    <div id="copyright-main-footer">© 2019, Amazon Web Services, Inc. or its affiliates. All rights reserved.</div>
+                </div>
+            </div>
+        </div>
+        <div id="right-expanded">
+            <div id="right-content-wrapper">
+                <div id="pagetoc">
+                    <p>On this page:</p>
+                    <ul class="pagetoc">
+                        <li class="pagetoc" name="Features of Amazon EC2"><a class="pagetoc" href="#ec2-features">Features of Amazon EC2</a></li>
+                        <li class="pagetoc" name="How to Get Started with Amazon EC2"><a class="pagetoc" href="#how-to-get-started">How to Get Started with Amazon EC2</a></li>
+                        <li class="pagetoc" name="Related Services"><a class="pagetoc" href="#related-services">Related Services</a></li>
+                        <li class="pagetoc" name="Accessing Amazon EC2"><a class="pagetoc" href="#access-ec2">Accessing Amazon EC2</a></li>
+                        <li class="pagetoc" name="Pricing for Amazon EC2"><a class="pagetoc" href="#ec2-pricing">Pricing for Amazon EC2</a></li>
+                        <li class="pagetoc" name="PCI DSS Compliance"><a class="pagetoc" href="#pci-compliance">PCI DSS Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="cookie-notice">
+    <div class="cookie-notice-text">We use cookies to provide and improve our services. By using our site, you consent
+        to cookies. <a href="http://aws.amazon.com/legal/cookies">Learn more</a></div>
+</div>
+<div id="footer">
+    <div id="footer_short_fb" class="hide" title="Feedback"><a target="_blank" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=EC2&amp;topic_url=http://docs.aws.amazon.com/en_us/AWSEC2/latest/UserGuide/concepts.html&amp;hidden_guide_name=User Guide for Linux Instances&amp;hidden_api_version=&amp;hidden_file_name=concepts"><i class="awsdocs-footer-text fa fa-envelope-o"></i></a></div>
+    <div id="footer_toggle" class="mediaobject">
+        <div id="footer_toggle_img" class="awsdocs-footer-text fa fa-caret-down"></div>
+        <div id="footer_toggle_img_collapse" class="hide awsdocs-footer-text fa fa-caret-right"></div>
+    </div>
+    <div id="footer-left"><a class="awsdocs-footer-text" target="_top" href="http://aws.amazon.com/terms">Terms of Use</a><span class="awsdocs-footer-text"> | </span><a class="awsdocs-footer-text" target="_top" href="http://aws.amazon.com/privacy">Privacy</a><span class="awsdocs-footer-text"> | </span><span class="awsdocs-footer-text">© 2019, Amazon Web Services, Inc. or its affiliates. All rights reserved.</span></div>
+    <div id="footer-right">
+        <div id="feedback">
+            <div id="forums"><a id="forum_link" target="_blank" href="http://forums.aws.amazon.com/forum.jspa?forumID=30" class="awsdocs-footer-text">Have a question? Try the Forums.</a></div>
+            <div id="feedback-message" class="awsdocs-footer-text">Did this page help you?</div>
+            <div id="feedback-yesno-buttons"><a class="awstoc btn btn-default" target="_blank" href="feedbackyes.html?topic_url=http://docs.aws.amazon.com/en_us/AWSEC2/latest/UserGuide/concepts.html">Yes</a><a class="awstoc btn btn-default" target="_blank" href="feedbackno.html?topic_url=http://docs.aws.amazon.com/en_us/AWSEC2/latest/UserGuide/concepts.html">No</a></div>
+            <div id="feedback-feedback-button"><a class="awstoc btn btn-default" target="_blank" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=EC2&amp;topic_url=http://docs.aws.amazon.com/en_us/AWSEC2/latest/UserGuide/concepts.html&amp;hidden_guide_name=User Guide for Linux Instances&amp;hidden_api_version=&amp;hidden_file_name=concepts">Feedback</a></div>
+        </div>
+    </div>
+</div>
+<!-- SiteCatalyst code version: H.25.2.
+      Copyright 1996-2012 Adobe, Inc. All Rights Reserved
+      More info available at http://www.omniture.com --><script language="JavaScript" type="text/javascript" src="https://a0.awsstatic.com/s_code/js/1.0/awshome_s_code.js"></script><script language="JavaScript" type="text/javascript">
+    <!--
+
+    // Documentation Service Name
+    s.prop66='Amazon Elastic Compute Cloud';
+    s.eVar66='D=c66';
+
+    // Documentation Guide Name
+    s.prop65='User Guide for Linux Instances';
+    s.eVar65='D=c65';
+
+    var s_code=s.t();if(s_code)document.write(s_code)//--></script><script language="JavaScript" type="text/javascript">
+    <!--
+    if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
+    //--></script><noscript><img src="https://amazonwebservices.d2.sc.omtrdc.net/b/ss/awsamazondev/1/H.25.2--NS/0" height="1" width="1" border="0" alt="" /></noscript>
+<!--/DO NOT REMOVE/-->
+<!-- End SiteCatalyst code version: H.25.2. -->
+</body>
+</html>

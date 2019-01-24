@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="no-js azure-header-static hasSidebar hasPageActions hasBreadcrumb landingpage" lang="ko-kr" dir="ltr" data-authenticated="false" data-target="docs" x-ms-format-detection="none">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:title" content="Azure Linux Virtual Machine 설명서 - 자습서, API 참조" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://docs.microsoft.com/ko-kr/azure/virtual-machines/linux/" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@docsmsft" />
+
+    <meta name="ms.openlocfilehash" content="cfe8611def427577cb000efe0e7c0568193aa4f8" />
+    <meta name="ms.sourcegitcommit" content="32d218f5bd74f1cd106f4248115985df631d0a8c" />
+    <meta name="ms.translationtype" content="HT" />
+    <meta name="ms.contentlocale" content="ko-KR" />
+    <meta name="ms.lasthandoff" content="09/24/2018" />
+    <meta name="ms.locfileid" content="46993445" />
+    <meta name="document_id" content="44409b3f-ab8c-053d-cdf4-5d7e823a275f" />
+    <meta name="meta.description" content="Learn how to create a virtual machine using the Linux distribution of your choice. Documentation shows different ways to create VM templates." />
+    <meta name="services" content="virtual-machines\linux" />
+    <meta name="author" content="czeumault" />
+    <meta name="manager" content="carolz" />
+    <meta name="ms.service" content="virtual-machines-linux" />
+    <meta name="ms.tgt_pltfrm" content="na" />
+    <meta name="ms.devlang" content="na" />
+    <meta name="ms.topic" content="landing-page" />
+    <meta name="ms.date" content="01/23/2017" />
+    <meta name="ms.author" content="carolz" />
+    <meta name="breadcrumb_path" content="/azure/bread/toc.json" />
+    <meta name="bilingual_type" content="hover over" />
+    <meta name="search.ms_sitename" content="Docs" />
+    <meta name="search.ms_docsetname" content="azure-documents" />
+    <meta name="version" content="0" />
+    <meta name="locale" content="ko-kr" />
+    <meta name="site_name" content="Docs" />
+    <meta name="search.ms_product" content="Azure" />
+    <meta name="depot_name" content="Azure.azure-documents" />
+    <meta name="updated_at" content="2019-01-02 06:50 PM" />
+    <meta name="gitcommit" content="https://github.com/MicrosoftDocs/azure-docs-pr.ko-kr/blob/796f46f4658b5e477c6ea05e98b7f5e175984224/articles/virtual-machines/linux/index.yml" />
+    <meta name="original_content_git_url" content="https://github.com/MicrosoftDocs/azure-docs-pr.ko-kr/blob/live-sxs/articles/virtual-machines/linux/index.yml" />
+    <meta name="document_version_independent_id" content="8602eb7b-c594-8b26-08d2-b7b4c59b6bc7" />
+    <meta name="page_type" content="landingdata" />
+    <meta name="toc_rel" content="toc.json" />
+
+    <meta name="scope" content="Azure" />
+    <link href="https://docs.microsoft.com/ko-kr/azure/virtual-machines/linux/" rel="canonical">
+    <title>Azure Linux Virtual Machine 설명서 - 자습서, API 참조 | Microsoft Docs</title>
+
+    <link rel="stylesheet" href="/_themes/docs.theme/master/ko-kr/_themes/styles/68875fdc.site-ltr.css ">
+
+    <link rel="stylesheet" href="/_themes/docs.theme/master/ko-kr/_themes/styles/367f696c.landingpage.css ">
+
+    <link rel="stylesheet" href="https://azurecomcdn.azureedge.net/ko-kr/asset/menucss/" />
+
+    <script>
+        var msDocs = {
+            data:{
+                azureHeaderLocale: 'ko-kr',
+                contentLocale: 'ko-kr',
+                contentDir: 'ltr',
+                userLocale: 'ko-kr',
+                userDir: 'ltr',
+                pageTemplate: 'LandingPage',
+                brand: 'azure',
+                context: {
+
+                },
+                hasComments: false,
+                feedbackSystem: 'GitHub',
+                feedbackGitHubRepo: 'MicrosoftDocs/azure-docs.ko-kr',
+                feedbackProductUrl: 'https://feedback.azure.com/forums/34192--general-feedback',
+                contentGitUrl: 'https://github.com/MicrosoftDocs/azure-docs.ko-kr/blob/live/articles/virtual-machines/linux/index.yml'
+            },
+            functions:{},
+            settings:{
+                extendBreadcrumb: false,
+                enableUHFPPE: false
+            }
+        };
+        if (!('Promise' in window && 'resolve' in window.Promise && 'reject' in window.Promise && 'all' in window.Promise && 'race' in window.Promise)) {
+            document.write('<script src="/_themes/docs.theme/master/ko-kr/_themes/global/js/6ee34c01.bluebird.min.js"><\/script>');
+        }
+        if (typeof fetch !== 'function') {
+            document.write('<script src="/_themes/docs.theme/master/ko-kr/_themes/global/js/d9fc435c.fetch.min.js"><\/script>');
+        }
+    </script>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+    <script src="/_themes/docs.theme/master/ko-kr/_themes/scripts/e96e8934.index-docs.js"></script>
+
+</head>
+
+<body lang="ko-kr" dir="ltr">
+<div class="header-holder">
+    <div id="azure-cookie-notification-holder">
+    </div>
+    <div id="headerAreaHolder" data-bi-name="header" lang="ko-kr" dir="ltr">
+        <div class="azure-header-placeholder"></div>
+    </div>
+    <div class="content-header uhf-container has-padding has-default-focus" data-bi-name="content-header">
+        <nav class="has-padding-none-mobile" data-bi-name="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList" role="navigation" aria-label="이동 경로">
+            <ul class="breadcrumbs">
+            </ul>
+        </nav>
+        <div class="content-header-controls exit-focus">
+            <button type="button" class="ap-collapse-behavior ap-expanded button" data-bi-name="ap-collapse">
+                <span class="icon"><span class="docon docon-exit-mode"></span></span>
+                <span>포커스 모드 종료</span>
+            </button>
+
+        </div>
+        <div class="content-header-controls">
+            <button type="button" class="contents-button button" data-bi-name="contents-expand">
+                <span class="icon"><span class="docon docon-menu"></span></span>
+                <span>콘텐츠</span>
+            </button>
+        </div>
+        <div class="action-bar">
+            <ul class="action-list">
+                <li id="contenteditbtn">
+                    <a href="https://github.com/MicrosoftDocs/azure-docs.ko-kr/blob/live/articles/virtual-machines/linux/index.yml" class="button is-text is-icon-only-touch is-size-7" title="이 문서 편집" data-bi-name="edit" data-original_content_git_url="https://github.com/MicrosoftDocs/azure-docs-pr.ko-kr/blob/live-sxs/articles/virtual-machines/linux/index.yml" data-original_content_git_url_template="" data-pr_repo="" data-pr_branch="">
+									<span class="icon">
+										<span class="docon docon-edit-outline" aria-hidden="true"></span>
+									</span>
+                        <span class="action-item-text">편집</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="sharing dropdown has-caret" auto-align>
+                        <a href="#" class="dropdown-trigger button is-text is-size-7 is-icon-only-touch" aria-haspopup="true" aria-controls="sharing-menu" aria-expanded="false" title="이 문서 공유" data-bi-name="share">
+							<span class="icon">
+								<span class="docon docon-sharing" aria-hidden="true"></span>
+							</span>
+                            <span class="action-item-text">공유</span>
+                        </a>
+                        <div class="dropdown-menu" id="sharing-menu" role="menu">
+                            <ul data-bi-name="share-links">
+                                <li><a class="share-twitter" data-bi-name="twitter">
+									<span class="icon">
+										<span class="docon docon-brand-twitter" aria-hidden="true"></span>
+									</span>
+                                    <span>Twitter</span></a></li>
+                                <li><a class="share-linkedin" data-bi-name="linkedin">
+									<span class="icon">
+										<span class="docon docon-brand-linkedin" aria-hidden="true"></span>
+									</span>
+                                    <span>LinkedIn</span></a></li>
+                                <li><a class="share-facebook" data-bi-name="facebook">
+									<span class="icon">
+										<span class="docon docon-brand-facebook" aria-hidden="true"></span>
+									</span>
+                                    <span>Facebook</span></a></li>
+                                <li><a class="share-email" data-bi-name="email">
+									<span class="icon">
+										<span class="docon docon-mail-message-fill" aria-hidden="true"></span>
+									</span>
+                                    <span>메일</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <button class="toggle-theme button is-text is-size-7 is-icon-only-touch" aria-label="toggle-theme" data-bi-name="select-theme">
+						<span class="icon">
+							<span class="docon docon-sun"></span>
+						</span>
+                        <span class="action-item-text">테마</span>
+                    </button>
+                </li>
+                <li>
+                    <div class="lang-toggle-container">
+                        <label for="language-toggle" aria-hidden="true" tabindex="-1">영어로 읽기</label>
+                        <div class="checkbox-toggle-wrapper">
+                            <input type="checkbox" id="language-toggle" aria-label="영어로 읽기">
+                            <label for="language-toggle" class="switch"></label>
+                        </div>
+                    </div>
+                </li>
+                <li class="is-unstyled-action-list-item">
+                    <a class="docs-sign-in not-authenticated button is-text has-text-primary is-size-7" href="#">로그인</a>
+                    <div class="dropdown has-caret authenticated" auto-align>
+                        <button class="dropdown-trigger button is-text is-size-7 is-icon-only-touch has-inner-focus" aria-label="계정" aria-haspopup="true" aria-controls="user-menu" aria-expanded="false">
+							<span class="image icon" aria-hidden="true">
+								<img class="has-body-background-medium is-rounded" data-profile-property="avatarUrl">
+							</span>
+                            <span class="is-truncated" data-profile-property="userName"></span>
+                        </button>
+                        <div class="dropdown-menu box" id="user-menu" role="menu">
+                            <div class="media is-user-dir">
+                                <div class="media-left">
+									<span class="image is-64x64" aria-hidden="true">
+										<img class="has-body-background-medium is-rounded" data-profile-property="avatarUrl">
+									</span>
+                                </div>
+                                <div class="media-content">
+                                    <p class="title has-margin-top-small">
+                                        <span class="is-truncated" style="max-width: 200px" data-profile-property="userName"></span>
+                                    </p>
+                                    <p class="subtitle">
+                                        <span class="is-truncated" style="max-width: 200px" data-profile-property="upn"></span>
+                                    </p>
+                                </div>
+                            </div>
+                            <ul class="is-unstyled has-margin-none">
+                                <li><a href="/profile" data-profile-property="profileUrl">프로필</a></li>
+                                <li><a class="docs-sign-out" href="#">로그아웃</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <button type="button" class="contents-button" aria-label="콘텐츠" data-bi-name="contents-expand-">
+                <span class="docon docon-editor-list-bullet"></span><span>Contents</span>
+            </button>
+        </div>
+    </div>
+    <div id="disclaimer-holder" class="disclaimer-holder"></div>
+</div>
+
+<div class="mainContainer uhf-container  has-top-padding  has-default-focus" data-bi-name="body">
+
+    <div class="columns ">
+
+        <section class="primary-holder column ">
+            <div class="columns ">
+
+
+
+                <div id="main-column" class="column ">
+
+                    <main id="main" role="main" class="content" data-bi-name="content" lang="ko-kr" dir="ltr">
+
+
+
+                        <h1>Linux 가상 머신</h1>
+
+
+
+
+                        <!-- <content> -->
+                        <div class="abstractHolder">
+                            <div class="abstract">
+                                <p>Azure Linux Virtual Machines는 Red Hat, Ubuntu 또는 원하는 Linux 배포를 사용하는 안전하고 가상화된 주문형 대규모 인프라를 제공합니다. 빠른 시작, 자습서 및 샘플을 사용하여 Linux VM을 생성, 구성, 관리, 업데이트 및 크기 조정하는 방법을 알아봅니다.</p>
+                            </div>
+                            <div class="aside">
+                                <a href="https://azure.microsoft.com/resources/videos/create-linux-virtual-machine/" data-linktype="external">
+                                    <img src="https://docs.microsoft.com/azure/virtual-machines/linux/media/index/create-linux-virtual-machine.png" alt="Linux Virtual Machine &#47564;&#46308;&#44592;. (4:11)" data-linktype="external">
+                                </a>
+                                <a href="https://azure.microsoft.com/resources/videos/create-linux-virtual-machine/" data-linktype="external">Linux Virtual Machine &#47564;&#46308;&#44592;. (4:11)</a>
+                            </div>
+                        </div>
+
+                        <h2>5분 빠른 시작</h2>
+                        <p>Ubuntu를 실행하는 Virtual Machine 내에 NGINX 웹 서버를 배포하는 방법을 알아봅니다.</p>
+                        <div class="ico48Case halfStack"><div class="ico48Link"><a href="https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-quick-create-cli?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json" data-linktype="external"><img src="https://docs.microsoft.com/azure/virtual-machines/linux/media/index/cli.svg" height="48px" width="48px" role="presentation" data-linktype="external"><span>Azure CLI</span></a></div><div class="ico48Link"><a href="https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-quick-create-portal?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json" data-linktype="external"><img src="https://docs.microsoft.com/azure/virtual-machines/linux/media/index/portal.svg" height="48px" width="48px" role="presentation" data-linktype="external"><span>Azure Portal</span></a></div><div class="ico48Link"><a href="https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-quick-create-powershell?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json" data-linktype="external"><img src="https://docs.microsoft.com/azure/virtual-machines/linux/media/index/logo_powershell.svg" height="48px" width="48px" role="presentation" data-linktype="external"><span>Azure PowerShell</span></a></div></div>
+                        <h2>단계별 자습서</h2>
+                        <p>Azure에서 Linux VM을 배포하고 관리하며 확장하는 방법에 대해 알아봅니다.</p>
+                        <ol><li><a href="/ko-kr/azure/virtual-machines/linux/tutorial-manage-vm" data-linktype="absolute-path">Linux VM 생성 및 관리</a></li><li><a href="/ko-kr/azure/virtual-machines/linux/tutorial-manage-disks" data-linktype="absolute-path">VM 디스크 생성 및 관리</a></li><li><a href="/ko-kr/azure/virtual-machines/linux/tutorial-automate-vm-deployment" data-linktype="absolute-path">VM 구성 자동화</a></li><li><a href="/ko-kr/azure/virtual-machines/linux/tutorial-custom-images" data-linktype="absolute-path">사용자 지정 VM 이미지 만들기</a></li><li><a href="/ko-kr/azure/virtual-machines/linux/tutorial-availability-sets" data-linktype="absolute-path">고가용성 VM 만들기</a></li><li><a href="/ko-kr/azure/virtual-machines/linux/tutorial-create-vmss" data-linktype="absolute-path">VM 확장 집합 만들기</a></li><li><a href="/ko-kr/azure/virtual-machines/linux/tutorial-load-balancer" data-linktype="absolute-path">VM 부하 분산</a></li><li><a href="/ko-kr/azure/virtual-machines/linux/tutorial-virtual-network" data-linktype="absolute-path">VM 및 가상 네트워크 관리</a></li><li><a href="/ko-kr/azure/virtual-machines/linux/tutorial-backup-vms" data-linktype="absolute-path">VM 백업</a></li><li><a href="/ko-kr/azure/virtual-machines/linux/tutorial-govern-resources" data-linktype="absolute-path">VM 제어</a></li><li><a href="/ko-kr/azure/virtual-machines/linux/tutorial-monitoring" data-linktype="absolute-path">VM 모니터링 및 업데이트</a></li><li><a href="/ko-kr/azure/virtual-machines/linux/tutorial-azure-security" data-linktype="absolute-path">VM에 대한 보안 관리</a></li><li><a href="/ko-kr/azure/virtual-machines/linux/tutorial-jenkins-github-docker-cicd" data-linktype="absolute-path">Jenkins, Docker 및 GitHub을 사용하여 CI/CD 인프라 만들기</a></li><li><a href="/ko-kr/azure/virtual-machines/linux/tutorial-build-deploy-jenkins" data-linktype="absolute-path">Azure Pipelines를 사용하는 CI/CD</a></li><li><a href="/ko-kr/azure/virtual-machines/linux/tutorial-lamp-stack" data-linktype="absolute-path">LAMP</a>, <a href="/ko-kr/azure/virtual-machines/linux/tutorial-lemp-stack" data-linktype="absolute-path">LEMP</a> 또는 <a href="/ko-kr/azure/virtual-machines/linux/tutorial-mean-stack" data-linktype="absolute-path">MEAN</a>을 사용하여 웹 서버 스택 만들기</li><li><a href="/ko-kr/azure/virtual-machines/linux/tutorial-secure-web-server" data-linktype="absolute-path">SSL을 사용하여 웹 서버 보안</a></li></ol>
+                        <h2>Microsoft Learn을 사용하여 기술 습득</h2>
+                        <ul class="panelContent cardsFTitle"><li><div class="cardSize"><div class="cardPadding"><div class="card"><div class="cardImageOuter"><div class="cardImage"><a href="/ko-kr/learn/modules/create-linux-virtual-machine-in-azure/" data-linktype="absolute-path"><img alt="" src="/ko-kr/learn/achievements/create-linux-virtual-machine-in-azure.svg" data-linktype="absolute-path"></a></div></div><div class="cardText"><h3><a href="/ko-kr/learn/modules/create-linux-virtual-machine-in-azure/" data-linktype="absolute-path"> Azure에서 Linux 가상 머신 만들기</a></h3></div></div></div></div></li><li><div class="cardSize"><div class="cardPadding"><div class="card"><div class="cardImageOuter"><div class="cardImage"><a href="/ko-kr/learn/modules/build-a-web-app-with-mean-on-a-linux-vm/" data-linktype="absolute-path"><img alt="" src="/ko-kr/learn/achievements/build-a-web-app-with-mean-on-a-linux-vm.svg" data-linktype="absolute-path"></a></div></div><div class="cardText"><h3><a href="/ko-kr/learn/modules/build-a-web-app-with-mean-on-a-linux-vm/" data-linktype="absolute-path">Azure Linux Virtual Machine에서 MEAN 스택을 사용하여 웹 애플리케이션 빌드 및 실행</a></h3></div></div></div></div></li></ul>
+                        <p><a href="/ko-kr/learn/browse/?products=azure-virtual-machines" data-linktype="absolute-path">더 많은 대화형 학습 보기...</a></p>
+                        <h2>무료 Pluralsight 동영상 교육</h2>
+                        <ul class="panelContent cardsFTitle"><li><div class="cardSize"><div class="cardPadding"><div class="card"><div class="cardImageOuter"><div class="cardImage"><a href="https://go.microsoft.com/fwlink/?linkid=2012827" data-linktype="external"><img alt="" src="https://docs.microsoft.com/media/logos/logo_pluralsight.svg" data-linktype="external"></a></div></div><div class="cardText"><h3><a href="https://go.microsoft.com/fwlink/?linkid=2012827" data-linktype="external">Azure 관리자</a></h3></div></div></div></div></li></ul>
+                        <h2>샘플</h2>
+                        <p>Azure에 첫 번째 애플리케이션을 배포합니다.</p>
+                        <ul class="spaced noBullet"><li><a href="/ko-kr/azure/virtual-machines/virtual-machines-linux-cli-samples" data-linktype="absolute-path">Azure CLI</a></li><li><a href="/ko-kr/azure/virtual-machines/virtual-machines-linux-powershell-samples" data-linktype="absolute-path">Azure PowerShell</a></li></ul>
+                        <h2>참고 자료</h2>
+                        <ul class="panelContent cardsD">
+                            <li>
+                                <div class="cardSize">
+                                    <div class="cardPadding">
+                                        <div class="card">
+                                            <div class="cardText">
+                                                <h3>명령줄</h3>
+                                                <p>
+                                                    <a href="/cli/azure/vm" data-linktype="absolute-path">Azure CLI</a>
+                                                </p>
+                                                <p>
+                                                    <a href="/ko-kr/powershell/azureps-cmdlets-docs" data-linktype="absolute-path">Azure PowerShell</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="cardSize"><div class="cardPadding"><div class="card"><div class="cardText"><h3>언어</h3><p><a href="/ko-kr/dotnet/api/microsoft.azure.management.compute" data-linktype="absolute-path">.NET</a></p><p><a href="/ko-kr/java/api" data-linktype="absolute-path">Java</a></p><p><a href="https://azure.microsoft.com/develop/nodejs/#azure-sdk" data-linktype="external">Node.JS</a></p><p><a href="https://azure.microsoft.com/develop/python/" data-linktype="external">Python</a></p></div></div></div></div>
+                            </li>
+                            <li>
+                                <div class="cardSize"><div class="cardPadding"><div class="card"><div class="cardText"><h3>REST (영문)</h3><p><a href="/ko-kr/rest/api/compute" data-linktype="absolute-path">REST API 참조</a></p></div></div></div></div>
+                            </li>
+                        </ul>
+
+                        <!-- </content> -->
+
+                    </main>
+
+                    <!-- feedback section -->
+
+
+
+                    <!-- end feedback section -->
+
+                    <div class="footerContainer is-visible-interactive has-default-focus ">
+                        <footer id="footer-interactive" data-bi-name="footer" class="footer-layout">
+
+                            <a data-mscc-ic="false" class="locale-selector-link" href="#" data-bi-name="select-locale"><span class="icon docon docon-world is-size-4 has-margin-right-small"></span><span class="local-selector-link-text"></span></a>
+
+                            <ul class="links" data-bi-name="footerlinks">
+                                <li><a data-mscc-ic="false" href="https://docs.microsoft.com/previous-versions/" data-bi-name="archivelink">이전 버전 문서</a></li>
+                                <li><a data-mscc-ic="false" href="https://docs.microsoft.com/teamblog" data-bi-name="bloglink">블로그</a></li>
+                                <li><a data-mscc-ic="false" href="https://docs.microsoft.com/contribute" data-bi-name="contributorGuide">참가</a></li>
+                                <li><a class="has-text-weight-semibold" data-mscc-ic="false" href="https://go.microsoft.com/fwlink/?LinkId=521839" data-bi-name="privacy">개인정보처리방침</a></li>
+                                <li><a data-mscc-ic="false" href="/ko-kr/legal/termsofuse" data-bi-name="termsofuse">사용 조건</a></li>
+                                <li><a data-mscc-ic="false" href="https://aka.ms/sitefeedback" data-bi-name="feedback">사이트 피드백</a></li>
+                                <li><a data-mscc-ic="false" href="https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/EN-US.aspx" data-bi-name="trademarks">상표</a></li>
+                            </ul>
+                        </footer>
+                    </div>
+                </div>
+
+                <!--end of div.columns -->
+
+            </div>
+
+            <!--end of .primary-holder -->
+        </section>
+
+        <div id="left-container" class="left-container column is-one-third-tablet is-one-quarter-desktop">
+            <nav class="sidebar" id="sidebar" data-bi-name="left toc" role="navigation" aria-label="주 탐색">
+                <button class="sidebar-header" type="button" aria-label="닫기" data-bi-name="contents-collapse">
+                    <span>콘텐츠</span>
+                    <span class="docon docon-navigate-close" aria-hidden="true"></span>
+                </button>
+                <div id="sidebarContent">
+                    <div class="filterHolder">
+                    </div>
+                    <nav class="toc"></nav>
+                    <div class="pdf-download-holder"></div>
+                </div>
+            </nav>
+        </div>
+
+        <aside id="interactive-container" class="interactive-container is-visible-interactive column has-body-background-dark ">
+        </aside>
+    </div>
+
+    <!--end of .mainContainer -->
+</div>
+
+<div id="openFeedbackContainer" class="openfeedback-container"></div>
+
+<div class="footerContainer has-default-focus is-hidden-interactive ">
+    <footer id="footer" data-bi-name="footer" class="footer-layout uhf-container has-padding" role="contentinfo">
+
+        <a data-mscc-ic="false" class="locale-selector-link" href="#" data-bi-name="select-locale"><span class="icon docon docon-world is-size-4 has-margin-right-small"></span><span class="local-selector-link-text"></span></a>
+
+        <ul class="links" data-bi-name="footerlinks">
+            <li><a data-mscc-ic="false" href="https://docs.microsoft.com/previous-versions/" data-bi-name="archivelink">이전 버전 문서</a></li>
+            <li><a data-mscc-ic="false" href="https://docs.microsoft.com/teamblog" data-bi-name="bloglink">블로그</a></li>
+            <li><a data-mscc-ic="false" href="https://docs.microsoft.com/contribute" data-bi-name="contributorGuide">참가</a></li>
+            <li><a class="has-text-weight-semibold" data-mscc-ic="false" href="https://go.microsoft.com/fwlink/?LinkId=521839" data-bi-name="privacy">개인정보처리방침</a></li>
+            <li><a data-mscc-ic="false" href="/ko-kr/legal/termsofuse" data-bi-name="termsofuse">사용 조건</a></li>
+            <li><a data-mscc-ic="false" href="https://aka.ms/sitefeedback" data-bi-name="feedback">사이트 피드백</a></li>
+            <li><a data-mscc-ic="false" href="https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/EN-US.aspx" data-bi-name="trademarks">상표</a></li>
+        </ul>
+    </footer>
+</div>
+
+<div class="action-panel has-default-focus"></div>
+</body>
+</html>

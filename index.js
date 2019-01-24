@@ -22,7 +22,7 @@ app.get("/docs", testDoc);
 app.post("/docs", parseDocs);
 
 app.listen(3005, () => {
-    console.log('listening on port 3000');
+    console.log('listening on port 3005');
 });
 
 function parseDocs(req, res) {
@@ -38,21 +38,31 @@ function parseDocs(req, res) {
         let htmlDoc = iconv.convert(body).toString();
 
         let results = [];
-        let str = "";
+
+        let str = '';
+
+        const aws = 'div#main-col-body';
+        const azure = 'main#main';
+        const googleCloud = 'article.devsite-article-inner';
 
         const $ = cheerio.load(htmlDoc);
 
-        let docMain = $('div#main-col-body').children().each( (i, elem) => {
+        let docMain = $(aws).children().each( (i, elem) => {
             results[i] = $(elem).html().replace(/(\r\n\t|\n|\r\t)/gm, " "); // 개행 제거하기 (플랫폼 상관 없음)
             results[i] = results[i].replace(/\t+/g,"");             // \t 제거하기
             results[i] = results[i].replace(/  +/g, ' ').trim();    // 여러 개의 공백을 하나의 공백으로 변경
-            results[i] = results[i].replace(/(<li([^>]+)>)/ig, "@@@");    // li 태그 제거하기
-            results[i] = results[i].replace(/<dt>/ig, "@@@");    // dt 태그 제거하기
-            results[i] = results[i].replace(/<dd>/ig, "@@@");    // dd 태그 제거하기
+            results[i] = results[i].replace(/(<li([^>]+)>)/ig, "@@@");    // li 태그 <br> 태그로 변경
+            results[i] = results[i].replace(/<\/h.>/ig, "@@@");    // </h.> 태그 <br> 태그로 변경
+            results[i] = results[i].replace(/<\/li>/ig, "@@@");    // </li> 태그 <br> 태그로 변경
+            results[i] = results[i].replace(/<ol>/ig, "@@@");    // ol 태그 <br> 태그로 변경
+            results[i] = results[i].replace(/<dt>/ig, "@@@");    // dt 태그 <br> 태그로 변경
+            results[i] = results[i].replace(/<dd>/ig, "@@@");    // dd 태그 <br> 태그로 변경
             results[i] = results[i].replace(/(<([^>]+)>)/ig,"");    // 태그 제거하기
-            results[i] = results[i].replace(/@@@/ig, "<br>");    // @@@ 문자열 <br> 로 대체
+            results[i] = results[i].replace(/@@@/ig, "<br><br>");    // @@@ 문자열 <br> 로 대체
+            results[i] = results[i].replace(/\. /ig, ". <br><br>");    // @@@ 문자열 <br> 로 대체
             str = str + results[i] + '<br>';
         });
+        console.log(str);
         res.send(str);
         //res.render("result");
     });
