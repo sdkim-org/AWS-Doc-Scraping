@@ -41,13 +41,15 @@ function parseDocs(req, res) {
 
         let str = '';
 
-        const aws = 'div#main-col-body';
-        const azure = 'main#main';
-        const googleCloud = 'article.devsite-article-inner';
+        const cloud = {
+            aws : 'div#main-col-body',
+            azure : 'main#main',
+            googleCloud : 'article.devsite-article-inner'
+        };
 
         const $ = cheerio.load(htmlDoc);
 
-        let docMain = $(aws).children().each( (i, elem) => {
+        let docMain = $(cloud.googleCloud).children().each( (i, elem) => {
             results[i] = $(elem).html().replace(/(\r\n\t|\n|\r\t)/gm, " "); // 개행 제거하기 (플랫폼 상관 없음)
             results[i] = results[i].replace(/\t+/g,"");             // \t 제거하기
             results[i] = results[i].replace(/  +/g, ' ').trim();    // 여러 개의 공백을 하나의 공백으로 변경
