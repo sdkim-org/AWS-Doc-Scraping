@@ -10,9 +10,14 @@
 <h2>Input</h2>
 <form action="/docs" method="post">
     <div>
+        <label>Select Cloud</label><br>
+        <input type="radio" name="cloud" value="aws" checked> AWS<br>
+        <input type="radio" name="cloud" value="azure"> Azure<br>
+        <input type="radio" name="cloud" value="googleCloud"> Google Cloud<br><br>
         <label>URL</label>
         <input type="text" id="url" name="url" value="">
     </div>
+    <br>
     <div>
         <button type="submit">Submit</button>
     </div>
