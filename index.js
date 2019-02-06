@@ -44,6 +44,7 @@ function parseDocs(req, res) {
         const clouds = {
             aws : 'div#main-col-body',
             azure : 'main#main',
+            azureBlog : 'article',
             googleCloud : 'article.devsite-article-inner'
         };
 
@@ -69,11 +70,14 @@ function parseDocs(req, res) {
             results[i] = results[i].replace(/<ol>/ig, "@@@");    // ol 태그 <br> 태그로 변경
             results[i] = results[i].replace(/<dt>/ig, "@@@");    // dt 태그 <br> 태그로 변경
             results[i] = results[i].replace(/<dd>/ig, "@@@");    // dd 태그 <br> 태그로 변경
+            results[i] = results[i].replace(/<\/div>/ig, "@@@");    // div 태그 <br> 태그로 변경
             results[i] = results[i].replace(/(<([^>]+)>)/ig,"");    // 태그 제거하기
             results[i] = results[i].replace(/@@@/ig, "\n");
             results[i] = results[i].replace(/\. /ig, ".\n");
             str = str + results[i] + '\n';
         });
+
+        str = str.replace(/&#x2019;/ig, "'");
 
         fs.writeFile(`./result/${cloud}_${title}.txt`, str, 'utf-8', (err, data) => {
             if(err) console.error(err);
@@ -90,6 +94,7 @@ function parseDocs(req, res) {
 function testDoc(req, res) {
     const urlAws = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html";
     const urlAzure = "https://docs.microsoft.com/en-us/azure/virtual-machines/linux/";
+    const urlAzureBlog = "https://azure.microsoft.com/en-us/blog/fastai-on-azure-dsvm/";
     const urlGoogleCloud = "https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app";
 
     request({urlAws, encoding: null}, (err, response, body) => {
