@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
+const fs = require('fs');
+
 const request = require('request');
 const cheerio = require('cheerio');
 const Iconv = require('iconv').Iconv;
@@ -26,22 +28,20 @@ app.listen(3005, () => {
 });
 
 function parseDocs(req, res) {
-    const { url } = req.body;
+    const { url, cloud } = req.body;
     request({url, encoding: null}, (err, response, body) => {
         if(err) {
             console.log(err);
-            res.send("Invalid URL");
-            //res.render("error");
+            //res.send("Invalid URL");
+            res.render("error");
             return ;
         }
 
         let htmlDoc = iconv.convert(body).toString();
 
         let results = [];
-
         let str = '';
-
-        const cloud = {
+        const clouds = {
             aws : 'div#main-col-body',
             azure : 'main#main',
             googleCloud : 'article.devsite-article-inner'
@@ -49,7 +49,17 @@ function parseDocs(req, res) {
 
         const $ = cheerio.load(htmlDoc);
 
-        let docMain = $(cloud.googleCloud).children().each( (i, elem) => {
+        let title='';
+        if(cloud == 'googleCloud') { // <h1 itemprop="name" class="devsite-page-title"> ... </h1>
+            $('.devsite-page-title').each((i, elem) => {
+                title = $(elem).html().replace(/(\r\n\t|\n|\r\t)/gm, "").trim();
+            });
+        } else { // <title> ... </title>
+            title = /<title>.+<\/title>/.exec(htmlDoc);
+            title = title.toString().replace(/<title>/, "").replace(/<\/title>/, "");
+        }
+
+        $(clouds[cloud]).children().each( (i, elem) => {
             results[i] = $(elem).html().replace(/(\r\n\t|\n|\r\t)/gm, " "); // 개행 제거하기 (플랫폼 상관 없음)
             results[i] = results[i].replace(/\t+/g,"");             // \t 제거하기
             results[i] = results[i].replace(/  +/g, ' ').trim();    // 여러 개의 공백을 하나의 공백으로 변경
@@ -60,20 +70,29 @@ function parseDocs(req, res) {
             results[i] = results[i].replace(/<dt>/ig, "@@@");    // dt 태그 <br> 태그로 변경
             results[i] = results[i].replace(/<dd>/ig, "@@@");    // dd 태그 <br> 태그로 변경
             results[i] = results[i].replace(/(<([^>]+)>)/ig,"");    // 태그 제거하기
-            results[i] = results[i].replace(/@@@/ig, "<br><br>");    // @@@ 문자열 <br> 로 대체
-            results[i] = results[i].replace(/\. /ig, ". <br><br>");    // @@@ 문자열 <br> 로 대체
-            str = str + results[i] + '<br>';
+            results[i] = results[i].replace(/@@@/ig, "\n");
+            results[i] = results[i].replace(/\. /ig, ".\n");
+            str = str + results[i] + '\n';
         });
-        console.log(str);
-        res.send(str);
-        //res.render("result");
+
+        fs.writeFile(`./result/${cloud}_${title}.txt`, str, 'utf-8', (err, data) => {
+            if(err) console.error(err);
+            else {
+                console.log('save files');
+            }
+        });
+
+        //res.send('success');
+        res.render("result");
     });
 }
 
 function testDoc(req, res) {
-    const url = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html";
+    const urlAws = "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html";
+    const urlAzure = "https://docs.microsoft.com/en-us/azure/virtual-machines/linux/";
+    const urlGoogleCloud = "https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app";
 
-    request({url, encoding: null}, (err, response, body) => {
+    request({urlAws, encoding: null}, (err, response, body) => {
         let htmlDoc = iconv.convert(body).toString();
         //console.log(htmlDoc); // Get HTML Source
 
