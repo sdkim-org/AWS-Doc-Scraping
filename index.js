@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const fs = require('fs');
+const AWS = require('aws-sdk');
+require('dotenv').config();
 
 const request = require('request');
 const cheerio = require('cheerio');
@@ -79,10 +81,26 @@ function parseDocs(req, res) {
 
         str = str.replace(/&#x2019;/ig, "'");
 
+        const s3 = new AWS.S3({
+            accessKeyId: process.env.AWS_ACCESS_KEY,
+            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+            region : 'ap-northeast-2'
+        });
+
         fs.writeFile(`./result/${cloud}_${title}.txt`, str, 'utf-8', (err, data) => {
             if(err) console.error(err);
             else {
-                console.log('save files');
+                const param = {
+                    'Bucket':process.env.AWS_BUCKET_NAME,
+                    'Key': `${cloud}/${cloud}_${title}.txt`,
+                    'ACL':'public-read-write',
+                    'Body':fs.createReadStream(`./result/${cloud}_${title}.txt`),
+                    'ContentType':'text/plain'
+                };
+                s3.upload(param, (err, data) => {
+                    if(err) console.log(err);
+                    else console.log(data);
+                });
             }
         });
 
